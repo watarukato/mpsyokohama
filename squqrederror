@@ -1,0 +1,24 @@
+import numpy as np
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+##入力 x =1 正解 yt = 0　のとき、sigmoidのαを1を-10～10、 bを-20～20の範囲で変更したときのSEをグラフで書く
+
+def se(yt,y0):
+    return np.power(yt-y0,2.0)
+
+def sigmoid(w,x,b):
+    return 1 / (1 + np.exp(-1*w*x + -1*b))
+
+if __name__ =='__main__':
+    w = np.linspace(-10.0,10.0,100)
+    b = np.linspace(-20.0,20.0,100)
+    
+    W,B = np.meshgrid(w,b)
+    Z = se(0, sigmoid(W,1,B))
+    
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    ax.plot_wireframe(W,B,Z)
+    
+    plt.show()
